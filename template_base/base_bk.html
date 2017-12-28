@@ -1,0 +1,42 @@
+{% load static %}<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>{% block title %}Event{% endblock %}</title>
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body>
+	<div id="wrap">
+		<div id="header"></div>
+		<div id="main">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				<div class="container">
+					<a class="navbar-brand" href="#">Event</a>
+				</div>
+			</nav>
+			<div class="container-fluid h-100">
+				<div class="row h-100">
+					<div class="col-2 collapse d-md-flex bg-faded pt-2 h-100" id="sidebar">
+						<ul class="nav flex-column">
+							<li class="nav-item"><a class="nav-link" href="#">Overview</a></li>               
+							<li class="nav-item"><a class="nav-link" href="#">Analytics</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">Export</a></li>
+						</ul>
+					</div>
+					<div class="col pt-2">
+						<ol class="breadcrumb my-4">
+							{% block breadcrumb %}
+							{% endblock %}
+						</ol>
+						{% block content %}
+						{% endblock %}
+					</div>
+				</div>
+			</div>
+		</div>
+		</div id="footer"></div>
+	</div>
+</body>
+</html>

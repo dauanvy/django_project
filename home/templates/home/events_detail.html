@@ -1,0 +1,14 @@
+{% extends 'base_ft.html' %}
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Home</li>
+  <li class="breadcrumb-item"><a href="{% url 'home:event_bk' %}">Events</a></li>
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-md-3">Detail Event</div>
+			<div>{{ object.name }}</div>			
+		</div>
+	</div>
+{% endblock %}
+
