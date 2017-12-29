@@ -6,12 +6,61 @@ from home.models import Location
 from home.models import LocationForm
 from home.models import Events
 from home.models import EventsForm
+from home.models import Category
+from home.models import CategoryForm
 
 def event_ft(request):
 	data = {}
 	list_item = Events.objects.all()
 	data['list_item'] = list_item
 	return render(request,'home/event_ft.html',data)
+	
+#category
+def category_bk(request):
+	form = CategoryForm(request.POST)
+	data = {}
+	if request.method == 'POST':
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/category_bk')
+	else :
+		form = CategoryForm()
+	list_item = Category.objects.all()
+	data['id'] = None
+	data['list_item'] = list_item
+	data['form'] = form
+	return render(request,'home/category_bk.html',data)
+def category_bk_update(request, id):
+	data = {}
+	try:
+		selected_item = Category.objects.get(pk=id)
+		form = CategoryForm(instance=selected_item)
+	except Category.DoesNotExist:
+		raise Http404("This item not exist.")
+	if request.method == 'POST':
+		form = CategoryForm(request.POST or None, instance=selected_item)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/category_bk')
+	list_item = Category.objects.all()
+	data['id'] = id
+	data['list_item'] = list_item
+	data['form'] = form
+	return render(request,'home/category_bk.html',data)
+
+def category_bk_remove(request, id):
+	data = {}
+	try:
+		selected_item = Category.objects.get(pk=id)
+		selected_item.delete()
+		form = Category()
+	except Category.DoesNotExist:
+		raise Http404("This item not exist.")
+	list_item = Category.objects.all()
+	data['id'] = None
+	data['list_item'] = list_item
+	data['form'] = form
+	return HttpResponseRedirect('/category_bk', data)
 #Location
 def location_bk(request):
 	form = LocationForm(request.POST)

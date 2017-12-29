@@ -30,18 +30,35 @@
 							<li class="nav-item">
 								<a class="nav-link" href="#">Log in</a>
 							</li>
+							<li class="nav-item"><a class="nav-link" href="{% url 'home:event_bk' %}">Events BackEnd</a></li>
 						</ul>
-						<form class="form-inline my-2 my-lg-0">
-							<input class="form-control mx-sm-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
-						</form>
 					</div>
 				</div>
 			</nav>
-		</div>
+		</div>		
 		<div id="main">	
-			<div class="jumbotron p-0">
+			<div class="jumbotron p-0 mb-0">
 				<div style="background:url({% static 'image/banner.jpg' %}) center center; background-size:cover; width: 100%;height:400px"></div>
+			</div>
+			<div class="container-fluid pt-3 pb-2">
+				<div class="container">
+					<div class="row h-100" >
+						<form class="form-inline w-100">
+							<div class="col-4 px-0 pl-lg-3 pr-lg-1 pl-md-3 pr-md-1" >							
+								<input class="form-control w-100" type="search" placeholder="Filter Category " aria-label="Search">															
+							</div>
+							<div class="col-4 px-1" >
+								<input class="form-control w-100" type="search" placeholder="Filter Location" aria-label="Search">	
+							</div>
+							<div class="col-4 pl-3" >
+								<div class="row" >
+									<div class="col-10 w-100 px-1"><input class="form-control w-100" type="search" placeholder="Search" aria-label="Search"></div>
+									<div class="col-2 w-100 px-1"><button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button></div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
 			<div class="container">
 				{% block content %}
