@@ -1,10 +1,13 @@
 {% extends 'base_bk.html' %}
-{% block breadcrumb %}
-  <li class="breadcrumb-item active"><a href="{% url 'home:event_ft' %}">Home</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'home:event_bk' %}">Events</a></li>
-	<li class="breadcrumb-item"><a href="{% url 'home:location_bk' %}">Location</a></li>
+<!--==Title==-->
+{% block title %}
+	Location
 {% endblock %}
-
+<!--==Nvbar Brand==-->
+{% block brand %}
+	Event
+{% endblock %}
+<!--==Content==-->
 {% block content %}
 	<!--Form nhap lieu-->
 	<div id="app_form" class="mb-4">
@@ -22,8 +25,14 @@
 						<div class="col-8">{{ form.name}}</div>
 					</div>
 					<div class="row my-2">
-						<div class="col-4">{{ form.category.label}}</div>
-						<div class="col-8">{{ form.category}}</div>
+						<div class="col-4">{{ form.category.label}}</div>											
+						<div class="col-8">
+							<select name="category" id="id_category" style="width:100%">
+								{% for name in form.category %}
+									{{ name }}
+								{% endfor %}
+							</select>
+						</div>
 					</div>
 					<div class="row my-2">
 						<div class="col-4">{{ form.organizer.label}}</div>
@@ -48,7 +57,11 @@
 					<div class="row my-2">
 						<div class="col-4">{{ form.end_date.label}}</div>
 						<div class="col-8">{{ form.end_date}}</div>
-					</div>					
+					</div>		
+					<div class="row my-2">
+						<div class="col-4">{{ form.phone.label}}</div>
+						<div class="col-8">{{ form.phone}}</div>
+					</div>	
 				</div>
 			</div>
 		</form>
@@ -63,6 +76,7 @@
 				<th>Location</th>
 				<th>Start Date</th>
 				<th>End Date</th>
+				<th>Phone</th>
 				<th></th>
 				<th></th>
 			</tr>
@@ -76,6 +90,7 @@
 				<td>{{ item.location }}</td>
 				<td>{{ item.start_date }}</td>
 				<td>{{ item.end_date }}</td>
+				<td>{{ item.phone }}</td>
 				<td><a href="{% url 'home:event_bk_update' id=item.id %}">Edit</a></td>
 				<td><a href="{% url 'home:event_bk_remove' id=item.id %}">Remove</a></td>
 			</tr>

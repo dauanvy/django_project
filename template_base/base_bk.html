@@ -12,24 +12,21 @@
 		<div id="header"></div>
 		<div id="main">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-				<div class="container">
-					<a class="navbar-brand" href="#">Event</a>
-				</div>
+				<a class="navbar-brand" href="#">
+					{% block brand %}Event{% endblock %}
+				</a>
 			</nav>
-			<div class="container-fluid h-100">
-				<div class="row h-100">
-					<div class="col-2 collapse d-md-flex bg-faded pt-2 h-100" id="sidebar">
-						<ul class="nav flex-column">
-							<li class="nav-item"><a class="nav-link" href="#">Overview</a></li>               
-							<li class="nav-item"><a class="nav-link" href="#">Analytics</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Export</a></li>
+			<div class="container-fluid">
+				<div class="row" style="height:100vh">
+					<div class="col-2 collapse d-md-flex bg-faded pt-2" id="menuleft">
+						<ul class="nav flex-column">							
+							<li class="nav-item"><a href="{% url 'home:event_ft' %}">Home</a></li>
+							<li class="nav-item"><a href="{% url 'home:event_bk' %}">Events</a></li>
+							<li class="nav-item"><a href="{% url 'home:location_bk' %}">Location</a></li>
+							<li class="nav-item"><a href="{% url 'home:category_bk' %}">Category</a></li>
 						</ul>
 					</div>
-					<div class="col pt-2">
-						<ol class="breadcrumb my-4">
-							{% block breadcrumb %}
-							{% endblock %}
-						</ol>
+					<div class="col pt-2" id="content">						
 						{% block content %}
 						{% endblock %}
 					</div>

@@ -35,3 +35,6 @@ h3.event-ft-h3> span {
     border-bottom: 3px solid green;
     line-height: 1.4;
 }
+#menuleft {
+	border-right:1px solid #868e96bf
+}

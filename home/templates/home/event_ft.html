@@ -1,42 +1,29 @@
 {% extends 'base_ft.html' %}
-{% block content %}
-	<div class="row">
-		<div class="col-md-3">
-			Category
-			<div class="breadcrumb-item"><a href="{% url 'home:event_bk' %}">Events BackEnd</a></div>
-		</div>
-		<div class="col-md-9">
-			{% if list_item|length %}
-				{% for item in list_item %}
+{% block content %}	
+	<div class="row">		
+		{% if list_item|length %}
+			{% for item in list_item|dictsortreversed:"start_date" %}
+				<div class="col-md-4">
 					<div class="event-ft-list">			
 						<a href="{{ item.get_absolute_url }}">												
 							<h3 class="text-success event-ft-h3">
 								<span>{{ item.name }}</span>
 							</h3>
-							<p style="margin-bottom: .2rem;">Organized by: {{ item.organized }}</p>
+							<p style="margin-bottom: .2rem;">Organized by: {{ item.organizer }}</p>
 							<div class="row">								
-								<div class="col-md-9 col-sm-8">											
-									<p>
-										{% if item.start_date %}
-											<span class="fa fa-clock-o fa-fw"></span> {{ item.start_date }} - {{ item.end_date }}<br>
-										{%endif%}
-										<span class="fa fa-map-marker fa-fw"></span> {{ item.location }}<br>
-										<span class="fa fa-tag fa-fw"></span> {{ item.category }}
-									</p>											
-								</div>
-								<div class="col-md-3 col-sm-4">
-									<p>
-										<span class="fa fa-phone"></span> (84-24) 3934 2535<br>
-										<span class="fa fa-fax"></span> (84-24) 3934 2537
-									</p>
+								<div class="col-md-12">											
+									{% if item.start_date %}
+										<span class="fa fa-clock-o fa-fw"></span> {{ item.start_date|date:'Y-m-d' }} - {{ item.end_date|date:'Y-m-d' }}<br/>
+									{%endif%}
+									<span class="fa fa-map-marker fa-fw"></span> {{ item.location.name}} - {{ item.location.street}} - {{ item.location.city}}<br/>
+									<span class="fa fa-tag fa-fw"></span> {{ item.category }}<br/>
+									<span class="fa fa-phone fa-fw"></span> {{ item.phone }}										
 								</div>
 							</div>
 						</a>
 					</div>
-					
-				{% endfor %}
-			{% endif %}			
-		</div>
-	</div>
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>	
 {% endblock %}
-
