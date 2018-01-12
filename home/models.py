@@ -2,6 +2,8 @@ from django.db import models
 from django import forms
 from datetime import date
 from django.template.defaultfilters import slugify
+from django.contrib.auth.models import User
+
 #Event
 #python3 manage.py migrate --fake home zero
 class Category(models.Model):
@@ -75,3 +77,11 @@ class EventsForm(forms.ModelForm):
 	class Meta:
 		model = Events
 		fields = ['name', 'phone', 'location','organizer','category', 'start_date', 'end_date']
+#Authenticate
+class UserRegistrationForm(forms.ModelForm):
+	username = forms.CharField(required = True, label = 'Username', max_length = 32)
+	email = forms.CharField(required = True, label = 'Email', max_length = 32)
+	password = forms.CharField(required = True,label = 'Password', max_length = 32, widget = forms.PasswordInput())
+	class Meta:
+		model = User
+		fields = ['username', 'email', 'password']

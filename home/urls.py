@@ -2,8 +2,14 @@ from django.conf.urls import *
 from django.conf import settings
 from home import views as home_views
 from .models import Events
+from django.contrib.auth import views as auth_views
 from django.views.generic import ListView, DetailView
+
 urlpatterns = [
+	url(r'^login$', auth_views.login),
+    url(r'^logout$', auth_views.logout),
+	url(r'^register$',home_views.register,name='register'),
+
     url(r'^$',home_views.event_ft,name='event_ft'),
     url(r'^event_bk$',home_views.event_bk,name='event_bk'),
 	url(r'^event_bk_update/(?P<id>[\d]+)$',home_views.event_bk_update,name='event_bk_update'),

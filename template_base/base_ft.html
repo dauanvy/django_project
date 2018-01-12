@@ -23,14 +23,19 @@
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarTogglerEvent">
-						<ul class="navbar-nav ml-auto">
-							<li class="nav-item">
-								<a class="nav-link" href="#">Sign up</a>
+						<ul class="navbar-nav ml-auto">							
+							<li class="nav-item"><a class="nav-link" href="{% url 'home:event_bk' %}">Events BackEnd</a></li>							
+								{% if user.is_authenticated %}
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
+								<div class="dropdown-menu mr-auto">
+									<a class="dropdown-item" href="/logout">Logout</a>
+								</div>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Log in</a>
-							</li>
-							<li class="nav-item"><a class="nav-link" href="{% url 'home:event_bk' %}">Events BackEnd</a></li>
+								{% else %}
+							<li class="nav-item"><a class="nav-link" href="/login">Sign in</a></li>
+							<li class="nav-item"><a class="nav-link" href="/register">Sign up</a></li>
+								{% endif %}
 						</ul>
 					</div>
 				</div>
