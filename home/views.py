@@ -9,6 +9,13 @@ from home.models import EventsForm
 from home.models import Category
 from home.models import CategoryForm
 
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+#from home.models import UserRegistrationForm
+#from django import forms
+from .models import UserRegistrationForm
+from django.contrib import messages
+
 def event_ft(request):
 	data = {}
 	list_item = Events.objects.all()
@@ -154,3 +161,23 @@ def event_bk_remove(request, id):
 	data['list_item'] = list_item
 	data['form'] = form
 	return HttpResponseRedirect('/event_bk', data)
+	
+#Authenticate
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            userObj = form.cleaned_data
+            username = userObj['username']
+            email =  userObj['email']
+            password =  userObj['password']
+            if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
+                User.objects.create_user(username, email, password)
+                user = authenticate(username = username, password = password)
+                login(request, user)
+                return HttpResponseRedirect('/')
+            else:
+                messages.error(request, "Error!")
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'login/register.html', {'form' : form})
